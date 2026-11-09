@@ -1,0 +1,34 @@
+server:
+  port: 8066
+
+spring:
+  application:
+    name: bank-account-cqrs
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/account_db}
+    username: ${DATABASE_USERNAME:admin}
+    password: ${DATABASE_PASSWORD:1234}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
+axon:
+  axonserver:
+    enabled: ${AXON_SERVER_ENABLED:true}
+    servers: ${AXON_SERVERS:localhost:8124}
+  serializer:
+    general: jackson
+    events: jackson
+    messages: jackson
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
